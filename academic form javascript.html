@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Academic Submission Form</title>
+
+<style>
+    * { box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    }
+
+    .card {
+        background: rgba(255,255,255,0.95);
+        width: 450px;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    h2 { text-align: center; color: #333; }
+
+    input, select, button {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    input:focus, select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 8px rgba(102,126,234,0.4);
+        outline: none;
+    }
+
+    button {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .success-box {
+        margin-top: 15px;
+        background: #e0f7fa;
+        padding: 15px;
+        border-left: 6px solid #00bcd4;
+        border-radius: 8px;
+        animation: fadeIn 0.6s ease;
+    }
+
+    .success-box h3 { margin-bottom: 8px; color: #00796b; }
+    .success-box p { margin: 3px 0; color: #333; }
+
+    @keyframes fadeIn {
+        from {opacity:0; transform:translateY(20px);}
+        to {opacity:1; transform:translateY(0);}
+    }
+</style>
+
+</head>
+<body>
+
+<div class="card">
+    <h2>Academic Submission Form</h2>
+
+    <form id="acadForm">
+        <input type="text" id="name" placeholder="Full Name">
+        <input type="email" id="email" placeholder="Email Address">
+        <input type="text" id="course" placeholder="Course Name">
+        <select id="platform">
+            <option value="">Select Platform</option>
+            <option value="Web">Web</option>
+            <option value="Mobile App">Mobile App</option>
+            <option value="Application">Application</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    const form = document.getElementById("acadForm");
+    const resultDiv = document.getElementById("result");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); // prevent form submission
+
+        // get values
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const course = document.getElementById("course").value.trim();
+        const platform = document.getElementById("platform").value;
+
+        // validation
+        if (!name || !email || !course || !platform) {
+            alert("Please fill all fields!");
+            return;
+        }
+
+        // show submitted data
+        resultDiv.innerHTML = `
+            <div class="success-box">
+                <h3>🎉 Submission Successful</h3>
+                <p><b>Name:</b> ${name}</p>
+                <p><b>Email:</b> ${email}</p>
+                <p><b>Course:</b> ${course}</p>
+                <p><b>Platform:</b> ${platform}</p>
+            </div>
+        `;
+
+        // optional: clear form
+        form.reset();
+    });
+</script>
+
+</body>
+</html>
